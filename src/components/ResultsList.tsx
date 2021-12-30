@@ -1,12 +1,17 @@
-// import { SyntheticEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import { InputGroup, Form, FormControl, Button, ButtonToolbar } from 'react-bootstrap'
+import { InputGroup, Form, FormControl, Button, ButtonToolbar } from 'react-bootstrap'
 
 function ResultsList({ results }: any) {
-    
-    return(<>{
-        results.map((result: any) => <NavLink to="/" key={result}>{result}</NavLink>)
-    }</>)
+  return (
+    <>
+      {
+        results.map((result: any) => 
+          <NavLink to="/" key={result}>{result}</NavLink>
+        )
+      }
+    </>
+  );
 }
 
 export default ResultsList;

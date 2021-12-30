@@ -5,53 +5,51 @@ import { InputGroup, Form, FormControl, Button, ButtonToolbar } from 'react-boot
 import ResultsList from './ResultsList'
 
 let allUsers = [
-    "Terry Jones",
-    "Michael Palin",
-    "Terry Gilliam",
-    "John Cleese",
-    "Eric Idle",
-    "Graham Chapman"
+  "Terry Jones",
+  "Michael Palin",
+  "Terry Gilliam",
+  "John Cleese",
+  "Eric Idle",
+  "Graham Chapman",
 ]
 
 function SearchBar() {
-    const [input, setInput] = useState("");
-    const [results, setResults] = useState([]);
+  const [input, setInput] = useState("");
+  // const [results, setResults] = useState([]);
 
-    let updateInput = (e: SyntheticEvent) => {
-        setInput((e.target as HTMLInputElement).value);
+  // const findAllUsers = () => {
+  //   return allUsers;
+  // }
+
+  const renderSearchResults = () => {
+    if (input.length) {
+      const results = allUsers.filter(
+        user => user.toLowerCase()
+        .includes(input.toLowerCase())
+      )
+      if (results.length) {
+        return (<ResultsList results={results} />)
+      }
+      const items = "users";
+      return (<p>{`No ${items} found`}</p>);
     }
+  }
 
-    return (<>
-    <InputGroup className="mb-3">
-      {/* <InputGroup.Text id="basic-addon1">SEARCH</InputGroup.Text> */}
-      <FormControl
-        placeholder="Search for {dynamic input - Users / Groups / Reverb (for everything)}"
-        aria-label="search-input"
-        aria-describedby="basic-addon1"
-      />
-      {/* <input list="plain-input" name="plain-input" onChange={updateInput} />
-      <datalist id="plain-input">
-          {allUsers.map(user =>
-            <option value={user} key={user} />
-          )}
-      </datalist> */}
-      <Button  variant="secondary" onClick={handleSearch}>SEARCH</Button>
-    </InputGroup>
-    <ResultsList results={allUsers} />
-
-
-</>)}
-
-const findAllUsers = () => {
-    return allUsers;
-}
-
-const handleSearch = () => {
-
-}
-
-const updateSearchResults = () => {
-
+  return (
+    <>
+      <InputGroup className="mb-3">
+        <FormControl
+          placeholder="Search for {dynamic input - Users / Groups / Reverb (for everything)}"
+          aria-label="search-input"
+          aria-describedby="basic-addon1"
+          value={input}
+          onChange={(e: SyntheticEvent) => {
+            setInput((e.target as HTMLInputElement).value)}}
+        />
+      </InputGroup>
+      {renderSearchResults()}
+    </>
+  )
 }
 
 export default SearchBar;
